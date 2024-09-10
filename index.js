@@ -9,7 +9,7 @@ app.use(express.json());
 
 // Mock user data
 let users = [
-  { id: '1', name: 'John Doe', email: 'john.doe@example.com', role: 'admin' },
+  { id: '1', name: 'Durga Prasad Shetty', email: 'dps2k811@gmail.com', role: 'admin' },
 ];
 
 // GET endpoint to retrieve users
