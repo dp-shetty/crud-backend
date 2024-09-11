@@ -18,30 +18,41 @@ app.get('/users', (req, res) => {
 });
 
 // POST endpoint to add a new user
-app.post('/users', (req, res) => {
-  const newUser = req.body;
+// app.post('/users', (req, res) => {
+//   const newUser = req.body;
 
-  // Validate required fields
-  if (!newUser.id || !newUser.name || !newUser.email || !newUser.role) {
-    return res.status(400).json({ error: 'Missing required fields' });
+//   // Validate required fields
+//   if (!newUser.id || !newUser.name || !newUser.email || !newUser.role) {
+//     return res.status(400).json({ error: 'Missing required fields' });
+//   }
+
+//   // Check if email already exists
+//   const userEmails = users.map(user => user.email);
+//   if (userEmails.includes(newUser.email)) {
+//     return res.status(400).json({ error: 'Email already exists' });
+//   }
+
+//   // Check if ID already exists
+//   const userIds = users.map(user => user.id);
+//   if (userIds.includes(newUser.id)) {
+//     return res.status(400).json({ error: 'ID already exists' });
+//   }
+
+//   // Add the new user
+//   users.push(newUser);
+
+//   res.status(201).json({ message: 'User added successfully', newUser });
+// });
+
+app.get('/users/:id', (req, res) => {
+  const { id } = req.params;
+  const user = users.find(user => user.id === id);
+
+  if (user) {
+    res.json(user);
+  } else {
+    res.status(404).json({ error: 'User not found' });
   }
-
-  // Check if email already exists
-  const userEmails = users.map(user => user.email);
-  if (userEmails.includes(newUser.email)) {
-    return res.status(400).json({ error: 'Email already exists' });
-  }
-
-  // Check if ID already exists
-  const userIds = users.map(user => user.id);
-  if (userIds.includes(newUser.id)) {
-    return res.status(400).json({ error: 'ID already exists' });
-  }
-
-  // Add the new user
-  users.push(newUser);
-
-  res.status(201).json({ message: 'User added successfully', newUser });
 });
 
 app.listen(port, () => {
